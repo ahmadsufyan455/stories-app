@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dico Stories</string>
+    <string name="password_error">Kata sandi minimal 6 karakter</string>
+    <string name="email_error">Gunakan email yang valid</string>
+    <string name="hint_email">Masukkan email</string>
+    <string name="hint_password">Masukkan password</string>
+    <string name="login_page">Halaman login</string>
+    <string name="login">Masuk</string>
+    <string name="register">Daftar</string>
+    <string name="create_account_label">Belum punya akun ?</string>
+    <string name="enter_your_name">Masukkan nama</string>
+    <string name="connection">Periksa koneksi kamu</string>
+    <string name="account_created">Akun kamu berhasil dibuat</string>
+    <string name="fill_fields">Semua kolom harus di isi</string>
+    <string name="detail">Detail Cerita</string>
+    <string name="add_story">Tambah Cerita</string>
+    <string name="camera">Kamera</string>
+    <string name="gallery">Galeri</string>
+    <string name="description">Description</string>
+    <string name="upload">Upload</string>
+    <string name="upload_image">Masukkan gambar terlebih dahulu</string>
+    <string name="no_permission">Tidak mendapatkan permission</string>
+    <string name="failed_picture">Gagal mengambil gambar</string>
+    <string name="failed_camera">Gagal menampilkan kamera</string>
+    <string name="logout">Keluar</string>
+    <string name="success_add">Cerita berhasil ditambahkan!</string>
+    <string name="settings">Pengaturan</string>
+    <string name="language">Bahasa</string>
+    <string name="dark">Gelap</string>
+    <string name="light">Terang</string>
+    <string name="appwidget_text">Contoh</string>
+    <string name="add_widget">Tambah widget</string>
+    <string name="app_widget_description">Deskripsi widget</string>
+    <string name="no_data">Tidak ada data</string>
+</resources>

@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Dico Stories</string>
+    <string name="password_error">Password at least 6 character</string>
+    <string name="email_error">Please use a valid email</string>
+    <string name="hint_email">Enter your email</string>
+    <string name="hint_password">Enter your password</string>
+    <string name="login_page">Login page</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="create_account_label">Don\'t have an account yet ?</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="connection">Check your connection</string>
+    <string name="account_created">Your account has been created</string>
+    <string name="fill_fields">Please fill all fields</string>
+    <string name="detail">Detail Story</string>
+    <string name="add_story">Add Story</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="description">Caption</string>
+    <string name="upload">Upload</string>
+    <string name="upload_image">Please insert image first</string>
+    <string name="no_permission">Not getting permission</string>
+    <string name="failed_picture">Failed to take picture</string>
+    <string name="failed_camera">Failed to showing camera</string>
+    <string name="logout">Logout</string>
+    <string name="success_add">Story successfully added!</string>
+    <string name="settings">Settings</string>
+    <string name="language">Language</string>
+    <string name="dark">Dark</string>
+    <string name="light">Light</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
+    <string name="no_data">No data</string>
+</resources>
