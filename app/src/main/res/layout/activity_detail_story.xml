@@ -23,7 +23,7 @@
             android:id="@+id/imgPhoto"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:contentDescription="@string/app_name"
+            android:contentDescription="@string/detail_photo_story"
             android:scaleType="centerCrop"
             tools:src="@color/cardview_dark_background" />
 

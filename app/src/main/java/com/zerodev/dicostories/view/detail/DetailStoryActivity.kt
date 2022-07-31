@@ -24,9 +24,11 @@ class DetailStoryActivity : AppCompatActivity() {
     }
 
     private fun populateView() {
-        Picasso.get().load(story.photoUrl).into(binding.imgPhoto)
-        binding.tvName.text = story.name
-        binding.tvDesc.text = story.description
+        with(binding) {
+            Picasso.get().load(story.photoUrl).into(imgPhoto)
+            tvName.text = story.name
+            tvDesc.text = story.description
+        }
     }
 
     companion object {

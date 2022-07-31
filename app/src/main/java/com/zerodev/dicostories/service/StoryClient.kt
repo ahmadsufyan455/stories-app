@@ -1,5 +1,6 @@
 package com.zerodev.dicostories.service
 
+import com.zerodev.dicostories.BuildConfig
 import com.zerodev.dicostories.utils.Constant.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -10,7 +11,11 @@ object StoryClient {
     val storyService: StoryService
         get() {
             val loggingInterceptor = HttpLoggingInterceptor()
-            loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+            loggingInterceptor.level = if (BuildConfig.DEBUG) {
+                HttpLoggingInterceptor.Level.BODY
+            } else {
+                HttpLoggingInterceptor.Level.NONE
+            }
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .build()

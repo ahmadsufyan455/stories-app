@@ -59,7 +59,7 @@ class StoryActivity : AppCompatActivity() {
     }
 
     private fun getData() {
-        storyViewModel.setStories(userPref.getUser().token!!)
+        userPref.getUser().token?.let { storyViewModel.setStories(it) }
         storyViewModel.getStories().observe(this) { stories ->
             if (stories != null) {
                 storyAdapter.setStories(stories)

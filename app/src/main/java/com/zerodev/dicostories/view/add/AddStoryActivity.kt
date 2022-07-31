@@ -85,7 +85,7 @@ class AddStoryActivity : AppCompatActivity() {
 
     private fun uploadStory() {
         binding.progressBar.visibility = View.VISIBLE
-        val token = userPref.getUser().token!!
+        val token = userPref.getUser().token
         if (getFile != null) {
             val file = reduceFileImage(getFile as File)
 
@@ -98,7 +98,9 @@ class AddStoryActivity : AppCompatActivity() {
                 requestImageFile
             )
 
-            addStoryViewModel.addStory(token, imageMultiPart, description)
+            if (token != null) {
+                addStoryViewModel.addStory(token, imageMultiPart, description)
+            }
             addStoryViewModel.getUploadResponse().observe(this) { response ->
                 if (!response.error) {
                     binding.progressBar.visibility = View.GONE
