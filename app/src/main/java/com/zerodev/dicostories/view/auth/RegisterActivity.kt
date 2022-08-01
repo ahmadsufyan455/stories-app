@@ -47,26 +47,27 @@ class RegisterActivity : AppCompatActivity() {
                     password = password
                 )
                 authViewModel.register(registerData)
-                authViewModel.isResponseSuccess().observe(this) { isResponseSuccess ->
-                    if (isResponseSuccess) {
-                        binding.progressBar.visibility = View.GONE
-                        authViewModel.getRegisterResponse().observe(this) { response ->
-                            if (response != null) {
-                                startActivity(Intent(this, LoginActivity::class.java))
-                                Toast.makeText(
-                                    this,
-                                    getString(R.string.account_created),
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                finishAffinity()
-                            }
-                        }
-                    } else {
-                        binding.progressBar.visibility = View.GONE
-                        authViewModel.getResponseMessage().observe(this) { message ->
-                            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-                        }
+            }
+        }
+
+        authViewModel.isResponseSuccess().observe(this) { isResponseSuccess ->
+            if (isResponseSuccess) {
+                binding.progressBar.visibility = View.GONE
+                authViewModel.getRegisterResponse().observe(this) { response ->
+                    if (response != null) {
+                        startActivity(Intent(this, LoginActivity::class.java))
+                        Toast.makeText(
+                            this,
+                            getString(R.string.account_created),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        finishAffinity()
                     }
+                }
+            } else {
+                binding.progressBar.visibility = View.GONE
+                authViewModel.getResponseMessage().observe(this) { message ->
+                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                 }
             }
         }

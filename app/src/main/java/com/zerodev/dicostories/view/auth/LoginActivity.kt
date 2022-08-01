@@ -41,22 +41,23 @@ class LoginActivity : AppCompatActivity() {
                 binding.progressBar.visibility = View.VISIBLE
                 val loginData = LoginModel(email = email, password = password)
                 authViewModel.login(loginData)
-                authViewModel.isResponseSuccess().observe(this) { isResponseSuccess ->
-                    if (isResponseSuccess) {
-                        binding.progressBar.visibility = View.GONE
-                        authViewModel.getLoginResponse().observe(this) { response ->
-                            if (response != null) {
-                                userPref.setUser(response.loginResult)
-                                moveToHome()
-                            }
-                        }
-                    } else {
-                        binding.progressBar.visibility = View.GONE
-                        authViewModel.getResponseMessage().observe(this) { message ->
-                            Toast.makeText(this, message, Toast.LENGTH_SHORT)
-                                .show()
-                        }
+            }
+        }
+
+        authViewModel.isResponseSuccess().observe(this) { isResponseSuccess ->
+            if (isResponseSuccess) {
+                binding.progressBar.visibility = View.GONE
+                authViewModel.getLoginResponse().observe(this) { response ->
+                    if (response != null) {
+                        userPref.setUser(response.loginResult)
+                        moveToHome()
                     }
+                }
+            } else {
+                binding.progressBar.visibility = View.GONE
+                authViewModel.getResponseMessage().observe(this) { message ->
+                    Toast.makeText(this, message, Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }
