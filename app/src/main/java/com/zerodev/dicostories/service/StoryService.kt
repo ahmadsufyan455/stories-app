@@ -14,13 +14,18 @@ interface StoryService {
     suspend fun register(@Body registerData: RegisterModel): Response<RegisterResponse>
 
     @GET("stories")
-    suspend fun getStories(@Header("Authorization") token: String): Response<StoryResponse>
+    suspend fun getStories(
+        @Header("Authorization") token: String,
+        @Query("location") location: Int? = null
+    ): Response<StoryResponse>
 
     @Multipart
     @POST("stories")
     suspend fun addStory(
         @Header("Authorization") token: String,
         @Part file: MultipartBody.Part,
-        @Part("description") description: RequestBody
+        @Part("description") description: RequestBody,
+        @Part("lat") lat: RequestBody,
+        @Part("lon") lon: RequestBody
     ): Response<FileUploadResponse>
 }

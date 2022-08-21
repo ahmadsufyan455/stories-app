@@ -35,4 +35,6 @@
     <string name="no_data">Tidak ada data</string>
     <string name="take_photo">Ambil foto</string>
     <string name="detail_photo_story">Detail foto cerita</string>
+    <string name="maps">Peta</string>
+    <string name="user_location">Lokasi Cerita Pengguna</string>
 </resources>

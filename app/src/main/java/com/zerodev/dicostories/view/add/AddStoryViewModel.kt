@@ -14,11 +14,17 @@ import okhttp3.RequestBody
 
 class AddStoryViewModel : ViewModel() {
     private val _uploadResponse = MutableLiveData<FileUploadResponse>()
-    fun addStory(token: String, image: MultipartBody.Part, description: RequestBody) {
+    fun addStory(
+        token: String,
+        image: MultipartBody.Part,
+        description: RequestBody,
+        lat: RequestBody,
+        lon: RequestBody
+    ) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response =
-                    StoryClient.storyService.addStory("Bearer $token", image, description)
+                    StoryClient.storyService.addStory("Bearer $token", image, description, lat, lon)
                 if (response.isSuccessful) {
                     _uploadResponse.postValue(response.body())
                 }

@@ -34,4 +34,7 @@
     <string name="no_data">No data</string>
     <string name="take_photo">Take photo</string>
     <string name="detail_photo_story">Detail photo story</string>
+    <string name="maps">Maps</string>
+    <string name="user_location">User Story Location</string>
+    <string name="map_token" translatable="false">AIzaSyDXrQu2iETleZxceFSc4wquCvY5C0MuAfY</string>
 </resources>
