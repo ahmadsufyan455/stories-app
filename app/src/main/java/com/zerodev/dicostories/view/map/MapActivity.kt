@@ -50,7 +50,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                             MarkerOptions().position(positions).title(stories[i].name)
                                 .snippet(stories[i].description)
                         )
-                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(positions, 5f))
+                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(positions, 10f))
                     }
                 }
             }
