@@ -1,22 +1,39 @@
 package com.zerodev.dicostories.database
 
 import android.content.Context
-import androidx.lifecycle.LiveData
+import androidx.paging.PagingSource
 import androidx.room.*
+import com.zerodev.dicostories.model.RemoteKeys
 import com.zerodev.dicostories.model.Story
 
 @Dao
 interface StoryDao {
     @Query("select * from story order by createdAt desc")
-    fun getStories(): LiveData<List<Story>>
+    fun getStories(): PagingSource<Int, Story>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(stories: List<Story>)
+
+    @Query("delete from story")
+    suspend fun deleteAll()
 }
 
-@Database(entities = [Story::class], version = 1, exportSchema = false)
+@Dao
+interface RemoteKeysDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(remoteKeys: List<RemoteKeys>)
+
+    @Query("select * from remote_keys where id = :id")
+    suspend fun getRemoteKeysId(id: String): RemoteKeys?
+
+    @Query("delete from remote_keys")
+    suspend fun deleteRemoteKeys()
+}
+
+@Database(entities = [Story::class, RemoteKeys::class], version = 1, exportSchema = false)
 abstract class StoryDatabase : RoomDatabase() {
     abstract val storyDao: StoryDao
+    abstract val remoteKeysDao: RemoteKeysDao
 }
 
 private lateinit var INSTANCE: StoryDatabase

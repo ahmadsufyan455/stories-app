@@ -94,10 +94,12 @@ class StoryActivity : AppCompatActivity() {
     }
 
     private fun getData() {
-        userPref.getUser().token?.let { storyViewModel.refreshDataFromRepository(it) }
-        storyViewModel.getStories().observe(this) { stories ->
-            if (stories != null) {
-                storyAdapter.setStories(stories)
+        val token = userPref.getUser().token
+        if (token != null) {
+            storyViewModel.getStories(token).observe(this) { stories ->
+                if (stories != null) {
+                    storyAdapter.submitData(lifecycle, stories)
+                }
             }
         }
     }

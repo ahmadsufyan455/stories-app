@@ -1,33 +1,36 @@
 package com.zerodev.dicostories.repository
 
 import androidx.lifecycle.LiveData
+import androidx.paging.*
 import com.zerodev.dicostories.database.StoryDatabase
 import com.zerodev.dicostories.model.Story
 import com.zerodev.dicostories.service.StoryClient
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.zerodev.dicostories.service.StoryService
 
-class StoryRepository(private val database: StoryDatabase) {
-    suspend fun refreshStory(token: String) {
-        withContext(Dispatchers.IO) {
-            val response = StoryClient.storyService.getStories("Bearer $token")
-            response.body()?.let { database.storyDao.insertAll(it.listStory) }
-        }
+class StoryRepository(private val database: StoryDatabase, private val storyService: StoryService) {
+
+    fun getStories(token: String): LiveData<PagingData<Story>> {
+        @OptIn(ExperimentalPagingApi::class)
+        return Pager(
+            config = PagingConfig(pageSize = 5),
+            remoteMediator = StoryRemoteMediator(token, database, storyService),
+            pagingSourceFactory = {
+                database.storyDao.getStories()
+            }
+        ).liveData
     }
 
     suspend fun getStoriesWithLocation(token: String): List<Story>? {
-        val response = StoryClient.storyService.getStories("Bearer $token", 1)
+        val response = StoryClient.storyService.getStories("Bearer $token", location = 1)
         return response.body()?.listStory
     }
-
-    fun getStories(): LiveData<List<Story>> = database.storyDao.getStories()
 
     companion object {
         @Volatile
         private var instance: StoryRepository? = null
-        fun getInstance(db: StoryDatabase): StoryRepository =
+        fun getInstance(db: StoryDatabase, storyService: StoryService): StoryRepository =
             instance ?: synchronized(this) {
-                instance ?: StoryRepository(db)
+                instance ?: StoryRepository(db, storyService)
             }.also { instance = it }
     }
 }
