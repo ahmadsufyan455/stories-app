@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.zerodev.dicostories.repository.StoryRepository
 import com.zerodev.dicostories.utils.Injection
-import com.zerodev.dicostories.view.map.MapViewModel
 
 class ViewModelFactory(
     private val storyRepository: StoryRepository
@@ -15,8 +14,6 @@ class ViewModelFactory(
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(StoryViewModel::class.java)) {
             return StoryViewModel(storyRepository) as T
-        } else if (modelClass.isAssignableFrom(MapViewModel::class.java)) {
-            return MapViewModel(storyRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }

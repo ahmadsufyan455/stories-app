@@ -29,7 +29,7 @@ class AddStoryViewModel : ViewModel() {
                     _uploadResponse.postValue(response.body())
                 }
             } catch (e: Exception) {
-                Log.e("AddStoryVM", e.toString())
+                Log.e("Exception", e.toString())
             }
         }
     }

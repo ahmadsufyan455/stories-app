@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.paging.*
 import com.zerodev.dicostories.database.StoryDatabase
 import com.zerodev.dicostories.model.Story
-import com.zerodev.dicostories.service.StoryClient
 import com.zerodev.dicostories.service.StoryService
 
 class StoryRepository(private val database: StoryDatabase, private val storyService: StoryService) {
@@ -18,11 +17,6 @@ class StoryRepository(private val database: StoryDatabase, private val storyServ
                 database.storyDao.getStories()
             }
         ).liveData
-    }
-
-    suspend fun getStoriesWithLocation(token: String): List<Story>? {
-        val response = StoryClient.storyService.getStories("Bearer $token", location = 1)
-        return response.body()?.listStory
     }
 
     companion object {

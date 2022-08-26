@@ -12,7 +12,6 @@ import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.zerodev.dicostories.R
 import com.zerodev.dicostories.databinding.ActivityMapBinding
-import com.zerodev.dicostories.view.list.viewmodel.ViewModelFactory
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -28,8 +27,10 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val token = intent.getStringExtra("TOKEN").toString()
 
-        val factory = ViewModelFactory.getInstance(this)
-        mapViewModel = ViewModelProvider(this, factory)[MapViewModel::class.java]
+        mapViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        )[MapViewModel::class.java]
         mapViewModel.setStoriesWithLocation(token)
 
         val mapFragment = supportFragmentManager
@@ -39,7 +40,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style))
-        mapViewModel.storiesWithLocation.observe(this) { stories ->
+        mapViewModel.getStoriesWithLocation().observe(this) { stories ->
             if (stories != null) {
                 for (i in stories.indices) {
                     val lat = stories[i].lat
@@ -50,7 +51,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                             MarkerOptions().position(positions).title(stories[i].name)
                                 .snippet(stories[i].description)
                         )
-                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(positions, 10f))
+                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(positions, 5f))
                     }
                 }
             }
