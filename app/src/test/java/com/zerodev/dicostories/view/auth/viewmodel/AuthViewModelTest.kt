@@ -26,16 +26,18 @@ class AuthViewModelTest {
     private val authViewModel = AuthViewModel()
     private val dummyRegister = DataDummy.generateDummyRegisterResponse()
     private val dummyLogin = DataDummy.generateDummyLoginResponse()
+    private val dummyRegisterModel = DataDummy.generateRegisterModel()
+    private val dummyLoginModel = DataDummy.generateDummyLoginModel()
 
     @Test
     fun `when Register Response Should Not Null And Return Success`() {
         val expectedResponse = MutableLiveData<RegisterResponse>()
         expectedResponse.value = dummyRegister
 
-        `when`(authViewModel.getRegisterResponse()).thenReturn(expectedResponse)
+        `when`(authViewModel.register(dummyRegisterModel)).thenReturn(expectedResponse)
 
-        val actualResponse = authViewModel.getRegisterResponse().getOrAwaitValue()
-        verify(authViewModel).getRegisterResponse()
+        val actualResponse = authViewModel.register(dummyRegisterModel).getOrAwaitValue()
+        verify(authViewModel).register(dummyRegisterModel)
         assertNotNull(actualResponse)
         assertEquals(dummyRegister, actualResponse)
     }
@@ -45,10 +47,10 @@ class AuthViewModelTest {
         val expectedResponse = MutableLiveData<LoginResponse>()
         expectedResponse.value = dummyLogin
 
-        `when`(authViewModel.getLoginResponse()).thenReturn(expectedResponse)
+        `when`(authViewModel.login(dummyLoginModel)).thenReturn(expectedResponse)
 
-        val actualResponse = authViewModel.getLoginResponse().getOrAwaitValue()
-        verify(authViewModel).getLoginResponse()
+        val actualResponse = authViewModel.login(dummyLoginModel).getOrAwaitValue()
+        verify(authViewModel).login(dummyLoginModel)
         assertNotNull(actualResponse)
         assertEquals(dummyLogin, actualResponse)
     }

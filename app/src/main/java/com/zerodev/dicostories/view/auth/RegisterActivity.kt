@@ -46,14 +46,7 @@ class RegisterActivity : AppCompatActivity() {
                     email = email,
                     password = password
                 )
-                authViewModel.register(registerData)
-            }
-        }
-
-        authViewModel.isResponseSuccess().observe(this) { isResponseSuccess ->
-            if (isResponseSuccess) {
-                binding.progressBar.visibility = View.GONE
-                authViewModel.getRegisterResponse().observe(this) { response ->
+                authViewModel.register(registerData).observe(this) { response ->
                     if (response != null) {
                         startActivity(Intent(this, LoginActivity::class.java))
                         Toast.makeText(
@@ -64,9 +57,15 @@ class RegisterActivity : AppCompatActivity() {
                         finishAffinity()
                     }
                 }
+            }
+        }
+
+        authViewModel.isResponseSuccess.observe(this) { isResponseSuccess ->
+            if (isResponseSuccess) {
+                binding.progressBar.visibility = View.GONE
             } else {
                 binding.progressBar.visibility = View.GONE
-                authViewModel.getResponseMessage().observe(this) { message ->
+                authViewModel.responseMessage.observe(this) { message ->
                     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                 }
             }

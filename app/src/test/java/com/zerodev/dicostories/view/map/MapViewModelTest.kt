@@ -30,15 +30,17 @@ class MapViewModelTest {
     private val mapViewModel = MapViewModel()
     private val dummyStories = DataDummy.generateDummyStoriesWithLocation()
 
+    private val dummyToken = "auth_token"
+
     @Test
     fun `when Get Stories With Location Should Not Null and Return Success`() {
         val expectedStories = MutableLiveData<List<Story>>()
         expectedStories.value = dummyStories
 
-        `when`(mapViewModel.getStoriesWithLocation()).thenReturn(expectedStories)
+        `when`(mapViewModel.getStoriesWithLocation(dummyToken)).thenReturn(expectedStories)
 
-        val actualStories = mapViewModel.getStoriesWithLocation().getOrAwaitValue()
-        verify(mapViewModel).getStoriesWithLocation()
+        val actualStories = mapViewModel.getStoriesWithLocation(dummyToken).getOrAwaitValue()
+        verify(mapViewModel).getStoriesWithLocation(dummyToken)
         assertNotNull(actualStories)
         assertEquals(dummyStories, actualStories)
         assertEquals(dummyStories.size, actualStories.size)

@@ -17,6 +17,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var binding: ActivityMapBinding
     private lateinit var mapViewModel: MapViewModel
+    private lateinit var token: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,13 +26,12 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         supportActionBar?.title = getString(R.string.user_location)
 
-        val token = intent.getStringExtra("TOKEN").toString()
+        token = intent.getStringExtra("TOKEN").toString()
 
         mapViewModel = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
         )[MapViewModel::class.java]
-        mapViewModel.setStoriesWithLocation(token)
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -40,7 +40,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style))
-        mapViewModel.getStoriesWithLocation().observe(this) { stories ->
+        mapViewModel.getStoriesWithLocation(token).observe(this) { stories ->
             if (stories != null) {
                 for (i in stories.indices) {
                     val lat = stories[i].lat

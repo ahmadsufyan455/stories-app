@@ -23,17 +23,31 @@ class AddStoryViewModelTest {
 
     @Mock
     private val addStoryViewModel = AddStoryViewModel()
+
+    private val dummyToken = "auth_token"
     private val dummyUploadResponse = DataDummy.generateDummyFileUploadResponse()
+    private val dummyMultipart = DataDummy.generateDummyMultipartFile()
+    private val dummyDescription = DataDummy.generateDummyRequestBody()
 
     @Test
     fun `add Story Successfully`() {
         val expectedResponse = MutableLiveData<FileUploadResponse>()
         expectedResponse.value = dummyUploadResponse
 
-        `when`(addStoryViewModel.getUploadResponse()).thenReturn(expectedResponse)
+        `when`(
+            addStoryViewModel.addStory(
+                dummyToken,
+                dummyMultipart,
+                dummyDescription,
+                null,
+                null
+            )
+        ).thenReturn(expectedResponse)
 
-        val actualResponse = addStoryViewModel.getUploadResponse().getOrAwaitValue()
-        verify(addStoryViewModel).getUploadResponse()
+        val actualResponse =
+            addStoryViewModel.addStory(dummyToken, dummyMultipart, dummyDescription, null, null)
+                .getOrAwaitValue()
+        verify(addStoryViewModel).addStory(dummyToken, dummyMultipart, dummyDescription, null, null)
         Assert.assertNotNull(actualResponse)
         assertEquals(dummyUploadResponse, actualResponse)
     }

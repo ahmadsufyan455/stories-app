@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 class MapViewModel : ViewModel() {
     private val _storiesWithLocation = MutableLiveData<List<Story>>()
 
-    fun setStoriesWithLocation(token: String) {
+    fun getStoriesWithLocation(token: String): LiveData<List<Story>> {
         viewModelScope.launch {
             try {
                 val response = StoryClient.storyService.getStories("Bearer $token", location = 1)
@@ -23,7 +23,6 @@ class MapViewModel : ViewModel() {
                 Log.e("exception", e.toString())
             }
         }
+        return _storiesWithLocation
     }
-
-    fun getStoriesWithLocation(): LiveData<List<Story>> = _storiesWithLocation
 }

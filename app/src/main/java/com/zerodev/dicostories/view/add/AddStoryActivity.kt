@@ -79,14 +79,18 @@ class AddStoryActivity : AppCompatActivity() {
 
             if (token != null) {
                 addStoryViewModel.addStory(token, imageMultiPart, description, latitude, longitude)
-            }
-            addStoryViewModel.getUploadResponse().observe(this) { response ->
-                if (!response.error) {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(this, getString(R.string.success_add), Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, StoryActivity::class.java))
-                    finishAffinity()
-                }
+                    .observe(this) { response ->
+                        if (!response.error) {
+                            binding.progressBar.visibility = View.GONE
+                            Toast.makeText(
+                                this,
+                                getString(R.string.success_add),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            startActivity(Intent(this, StoryActivity::class.java))
+                            finishAffinity()
+                        }
+                    }
             }
         } else {
             Toast.makeText(this, R.string.upload_image, Toast.LENGTH_SHORT).show()

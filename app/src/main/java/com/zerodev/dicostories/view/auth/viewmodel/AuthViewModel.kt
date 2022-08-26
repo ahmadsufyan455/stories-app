@@ -16,9 +16,14 @@ import kotlinx.coroutines.launch
 class AuthViewModel : ViewModel() {
     private val _loginResponse = MutableLiveData<LoginResponse>()
     private val _registerResponse = MutableLiveData<RegisterResponse>()
+
     private val _isResponseSuccess = MutableLiveData<Boolean>()
+    val isResponseSuccess get() = _isResponseSuccess
+
     private val _responseMessage = MutableLiveData<String>()
-    fun login(loginData: LoginModel) {
+    val responseMessage get() = _responseMessage
+
+    fun login(loginData: LoginModel): LiveData<LoginResponse> {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = StoryClient.storyService.login(loginData)
@@ -37,9 +42,10 @@ class AuthViewModel : ViewModel() {
                 _isResponseSuccess.postValue(false)
             }
         }
+        return _loginResponse
     }
 
-    fun register(registerData: RegisterModel) {
+    fun register(registerData: RegisterModel): LiveData<RegisterResponse> {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = StoryClient.storyService.register(registerData)
@@ -58,10 +64,6 @@ class AuthViewModel : ViewModel() {
                 _isResponseSuccess.postValue(false)
             }
         }
+        return _registerResponse
     }
-
-    fun isResponseSuccess(): LiveData<Boolean> = _isResponseSuccess
-    fun getLoginResponse(): LiveData<LoginResponse> = _loginResponse
-    fun getRegisterResponse(): LiveData<RegisterResponse> = _registerResponse
-    fun getResponseMessage(): LiveData<String> = _responseMessage
 }

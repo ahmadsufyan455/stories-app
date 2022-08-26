@@ -18,9 +18,9 @@ class AddStoryViewModel : ViewModel() {
         token: String,
         image: MultipartBody.Part,
         description: RequestBody,
-        lat: RequestBody,
-        lon: RequestBody
-    ) {
+        lat: RequestBody?,
+        lon: RequestBody?
+    ): LiveData<FileUploadResponse> {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response =
@@ -32,7 +32,6 @@ class AddStoryViewModel : ViewModel() {
                 Log.e("Exception", e.toString())
             }
         }
+        return _uploadResponse
     }
-
-    fun getUploadResponse(): LiveData<FileUploadResponse> = _uploadResponse
 }
