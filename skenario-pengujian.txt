@@ -1,0 +1,22 @@
+1. Register test
+- Memastikan actualResponse tidak null
+- Memastikan bahwa actualResponse sama dengan dummyRegisterResponse
+
+2. Login test
+- Memastikan actualResponse tidak null
+- Memastikan bahwa actualResponse sama dengan dummyLoginResponse
+
+3. List story test
+- Memastikan data stories tidak null
+- Memastikan data stories sama dengan dummy stories
+- Memastikan ukuran data stories sama dengan ukuran data dummy stories
+
+4. Add story test
+- Memastikan actualResponse tidak null
+- Memastikan bahwa actualResponse sama dengan dummy upload response.
+
+5. Story with location test
+- Memastikan data stories tidak null
+- Memastikan data stories sama dengan dummy stories
+- Memastikan ukuran data stories sama dengan ukuran data dummy stories
+- Memastikan data lat dan lon tidak null
