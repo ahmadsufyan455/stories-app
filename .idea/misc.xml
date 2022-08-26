@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.13044579533941236" />
+        <entry key="app/src/main/res/drawable-v21/app_widget_background.xml" value="0.1415" />
+        <entry key="app/src/main/res/drawable-v21/app_widget_inner_view_background.xml" value="0.1415" />
         <entry key="app/src/main/res/drawable/border.xml" value="0.139" />
         <entry key="app/src/main/res/drawable/button_bg.xml" value="0.139" />
         <entry key="app/src/main/res/drawable/custom_email_icon.xml" value="0.1" />
